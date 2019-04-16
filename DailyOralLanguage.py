@@ -25,37 +25,47 @@ def main():
     text.draw(win)
 
     # Add button objects - Misplaced Modifiers
-    rect = Rectangle(Point(60, 170), Point(260, 200)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(163, 185), "Misplaced Modifiers").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect1 = Rectangle(Point(60, 170), Point(260, 200)).draw(win)
+    rect1.setFill(color_rgb(28, 147, 215))
+    text1 = Text(Point(163, 185), "Misplaced Modifiers").draw(win)
+    text1.setTextColor("white")
+    text1.setStyle("bold")
 
     # Add button objects - Pronoun Case
-    rect = Rectangle(Point(60, 230), Point(260, 260)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(163, 245), "Pronoun Case").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect2 = Rectangle(Point(60, 230), Point(260, 260)).draw(win)
+    rect2.setFill(color_rgb(28, 147, 215))
+    text2 = Text(Point(163, 245), "Pronoun Case").draw(win)
+    text2.setTextColor("white")
+    text2.setStyle("bold")
 
     # Add button objects - Punctuation
-    rect = Rectangle(Point(60, 290), Point(260, 320)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(160, 305), "Punctuation").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect3 = Rectangle(Point(60, 290), Point(260, 320)).draw(win)
+    rect3.setFill(color_rgb(28, 147, 215))
+    text3 = Text(Point(160, 305), "Punctuation").draw(win)
+    text3.setTextColor("white")
+    text3.setStyle("bold")
 
     # Add button objects - Subject/Verb Agreement
-    rect = Rectangle(Point(60, 350), Point(260, 380)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(159, 365), "Subject/Verb Agreement").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect4 = Rectangle(Point(60, 350), Point(260, 380)).draw(win)
+    rect4.setFill(color_rgb(28, 147, 215))
+    text4 = Text(Point(159, 365), "Subject/Verb Agreement").draw(win)
+    text4.setTextColor("white")
+    text4.setStyle("bold")
 
-    win.getMouse()
-    win.close()
 
-main()
+    while True:
+        clickPoint = win.checkMouse()
+
+        if clickPoint != None:
+
+            if inside(clickPoint, rect1):
+                text1.setText("right")
+            elif inside(clickPoint, rect2):
+                text2.setText("right")
+            elif inside(clickPoint, rect3):
+                text3.setText("right")
+            elif inside(clickPoint, rect4):
+                text4.setText("right")
 
 
 def misplacedmodifiers():
@@ -289,17 +299,8 @@ def inside(point, rectangle):
 
     return ll.getX() < point.getX() < ur.getX() and ll.getY() < point.getY() < ur.getY()
 
-while True:
-    clickPoint = win.getMouse()
-
-    if inside(clickPoint, (Point(60, 170), Point(260, 200))):
-        text.setText("right")
-    elif inside(clickPoint, (Point(60, 230), Point(260, 260))):
-        text.setText("right")
-    elif inside(clickPoint, (Point(60, 290), Point(260, 320))):
-        text.setText("right")
-    elif inside(clickPoint, (Point(60, 350), Point(260, 380))):
-        text.setText("right")
+if __name__ == "__main__":    # Lets the user import without running everything.
+    main()
 
 
 
