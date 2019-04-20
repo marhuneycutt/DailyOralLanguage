@@ -59,13 +59,17 @@ def main():
         if clickPoint != None:
 
             if inside(clickPoint, rect1):
-                text1.setText("right")
+                # text1.setText("continuing . . .")
+                misplacedmodifiers()
             elif inside(clickPoint, rect2):
-                text2.setText("right")
+                # text2.setText("continuing . . .")
+                pronouncase()
             elif inside(clickPoint, rect3):
-                text3.setText("right")
+                # text3.setText("continuing . . .")
+                punctuation()
             elif inside(clickPoint, rect4):
-                text4.setText("right")
+                # text4.setText("continuing . . .")
+                subjectverbagreement()
 
 
 def misplacedmodifiers():
@@ -92,12 +96,13 @@ def misplacedmodifiers():
 
     text = Text(Point(160, 170), "This sentence contains at least one error\n in grammar or "
                                   "word usage. Click on the\n word that is the problem or part of the problem.")
+    text.setTextColor("black")
     text.setSize(11)
     text.draw(win)
 
     # Import first sentence from .csv file into this location.
-    dummyText = Text(Point(160, 250), "Lorem ipsum dolor sit amet, animal\n deleniti fabellas vis in, te mel modus\n "
-                                  "singulis accusata.")
+    text = Text(Point(160, 250), "The teacher returned the exam to the\n student that was all marked up.")
+
     # count = 0
     # If user clicks within sensitive area surrounding answer where correct answer lies:
     # change answer text to red
@@ -107,16 +112,16 @@ def misplacedmodifiers():
     # print("Try ", count)
     # else change answer text color to red
     # print(explanation for its correctness)
-    dummyText.setTextColor("gray")
-    dummyText.setSize(13)
-    dummyText.draw(win)
+    text.setTextColor("gray")
+    text.setSize(13)
+    text.draw(win)
 
     # Home button
-    rect = Rectangle(Point(20, 410), Point(90, 440)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(57, 425), "Home").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect5 = Rectangle(Point(20, 410), Point(90, 440)).draw(win)
+    rect5.setFill(color_rgb(28, 147, 215))
+    text5 = Text(Point(57, 425), "Home").draw(win)
+    text5.setTextColor("white")
+    text5.setStyle("bold")
 
     # Check button becomes sensitive area where number of tries is revealed
     # rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
@@ -126,16 +131,29 @@ def misplacedmodifiers():
     #dtext.setStyle("bold")
 
     # Next button
-    rect = Rectangle(Point(220, 410), Point(290, 440)).draw(win)
-    rect.setFill(color_rgb(28, 147, 215))
-    text = Text(Point(255, 425), "Next").draw(win)
-    text.setTextColor("white")
-    text.setStyle("bold")
+    rect6 = Rectangle(Point(220, 410), Point(290, 440)).draw(win)
+    rect6.setFill(color_rgb(28, 147, 215))
+    text6 = Text(Point(255, 425), "Next").draw(win)
+    text6.setTextColor("white")
+    text6.setStyle("bold")
 
     # If next button is clicked, import next sentence from .csv file.
 
-    win.getMouse()
-    win.close()
+
+    while True:
+        clickPoint = win.checkMouse()
+
+        if clickPoint != None:
+
+            if inside(clickPoint, rect5):
+                main()
+            elif inside(clickPoint, rect6):
+                advancesentence()
+
+
+    # Uncomment these to make the windows close by click.
+    # win.getMouse()
+    # win.close()
 
 
 def pronouncase():
@@ -165,8 +183,7 @@ def pronouncase():
     text.setSize(11)
     text.draw(win)
 
-    dummyText = Text(Point(160, 250), "Lorem ipsum dolor sit amet, animal\n deleniti fabellas vis in, te mel modus\n "
-                                  "singulis accusata.")
+    dummyText = Text(Point(160, 250), "Me and Joe are going\n to the gym today.")
     dummyText.setTextColor("gray")
     dummyText.setSize(13)
     dummyText.draw(win)
@@ -197,7 +214,7 @@ def punctuation():
     # Add text objects
     text = Text(Point(160, 45), "Daily Oral Language")
     text.setSize(20)
-    xtext.draw(win)
+    text.draw(win)
 
     text = Text(Point(160, 90), "The category is:")
     text.setSize(12)
@@ -289,6 +306,13 @@ def subjectverbagreement():
 
     win.getMouse()
     win.close()
+
+
+# def advancesentence():   # When next button clicked
+#     infile = open('misplaced_modifiers.csv', 'r')
+#     Line = infile.readline()
+#     print(infile.readlines()[2])    # How to print subsequent sentences?
+#     text.insert = Text(Point(160, 250), infile.readlines()[2])
 
 
 def inside(point, rectangle):
