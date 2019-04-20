@@ -59,17 +59,18 @@ def main():
         if clickPoint != None:
 
             if inside(clickPoint, rect1):
-                # text1.setText("continuing . . .")
                 misplacedmodifiers()
             elif inside(clickPoint, rect2):
-                # text2.setText("continuing . . .")
                 pronouncase()
             elif inside(clickPoint, rect3):
-                # text3.setText("continuing . . .")
                 punctuation()
             elif inside(clickPoint, rect4):
                 # text4.setText("continuing . . .")
                 subjectverbagreement()
+            elif inside(clickPoint, rect5):
+                main()
+            elif inside(clickPoint, rect6):
+                advancesentence()
 
 
 def misplacedmodifiers():
@@ -103,15 +104,8 @@ def misplacedmodifiers():
     # Import first sentence from .csv file into this location.
     text = Text(Point(160, 250), "The teacher returned the exam to the\n student that was all marked up.")
 
-    # count = 0
-    # If user clicks within sensitive area surrounding answer where correct answer lies:
-    # change answer text to red
-    # print("Correct", explanation for its correctness)
-    # elif count <= 3
-    # count = count + i
-    # print("Try ", count)
-    # else change answer text color to red
-    # print(explanation for its correctness)
+    rectA = Rectangle(Point(105, 250), Point(275, 270)).draw(win)
+    rectA.setOutline(color_rgb(204, 236, 255))
     text.setTextColor("gray")
     text.setSize(13)
     text.draw(win)
@@ -123,12 +117,12 @@ def misplacedmodifiers():
     text5.setTextColor("white")
     text5.setStyle("bold")
 
-    # Check button becomes sensitive area where number of tries is revealed
-    # rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
-    # rect.setFill(color_rgb(28, 147, 215))
-    #dtext = Text(Point(155, 425), "Check").draw(win)
-    #dtext.setTextColor("white")
-    #dtext.setStyle("bold")
+    # Try again button
+    # rect7 = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
+    # rect7.setOutline(color_rgb(204, 236, 255))
+    # text7 = Text(Point(155, 425), "Try again").draw(win)
+    # text7.setTextColor("red")
+    # text7.setStyle("bold")
 
     # Next button
     rect6 = Rectangle(Point(220, 410), Point(290, 440)).draw(win)
@@ -140,6 +134,7 @@ def misplacedmodifiers():
     # If next button is clicked, import next sentence from .csv file.
 
 
+    whichsentence = 0
     while True:
         clickPoint = win.checkMouse()
 
@@ -147,11 +142,26 @@ def misplacedmodifiers():
 
             if inside(clickPoint, rect5):
                 main()
+
             elif inside(clickPoint, rect6):
-                advancesentence()
+                whichsentence +=1
+                advancesentence(text, whichsentence)
+
+            elif inside(clickPoint, rectA):
+                rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
+                rect.setOutline(color_rgb(204, 236, 255))
+                text = Text(Point(155, 425), "Correct!").draw(win)
+                text.setTextColor("red")
+                text.setStyle("bold")
+
+            elif clickPoint != inside(clickPoint, rectA):
+                rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
+                rect.setOutline(color_rgb(204, 236, 255))
+                text = Text(Point(155, 425), "Try again").draw(win)
+                text.setTextColor("red")
+                text.setStyle("bold")
 
 
-    # Uncomment these to make the windows close by click.
     # win.getMouse()
     # win.close()
 
@@ -308,11 +318,11 @@ def subjectverbagreement():
     win.close()
 
 
-# def advancesentence():   # When next button clicked
-#     infile = open('misplaced_modifiers.csv', 'r')
-#     Line = infile.readline()
-#     print(infile.readlines()[2])    # How to print subsequent sentences?
-#     text.insert = Text(Point(160, 250), infile.readlines()[2])
+def advancesentence(text, index):
+    infile = open('misplaced_modifiers.csv', 'r')
+    data = infile.read()    # read all of the data
+    lines = data.split('\n')    # split the data into sentences
+    text.setText(lines[index])  # update the text object with the desired sentence
 
 
 def inside(point, rectangle):
@@ -322,6 +332,7 @@ def inside(point, rectangle):
     ur = rectangle.getP2()  # assume p2 is ur (upper right)
 
     return ll.getX() < point.getX() < ur.getX() and ll.getY() < point.getY() < ur.getY()
+
 
 if __name__ == "__main__":    # Lets the user import without running everything.
     main()
