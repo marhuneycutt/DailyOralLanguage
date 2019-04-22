@@ -1,6 +1,7 @@
 # DailyOralLanguage.py
 
 from graphics import *
+import time
 
 
 def main():
@@ -83,32 +84,44 @@ def misplacedmodifiers():
     text.setSize(20)
     text.draw(win)
 
-    text = Text(Point(160,90), "The category is:")
+    text = Text(Point(160,80), "The category is:")
     text.setSize(12)
     text.setTextColor("red")
     text.setStyle("italic")
     text.draw(win)
 
-    text = Text(Point(160,120), "Misplaced Modifiers")
+    text = Text(Point(160,110), "Misplaced Modifiers")
     text.setSize(16)
     text.setStyle("italic")
     text.setStyle("bold")
     text.draw(win)
 
-    text = Text(Point(160, 170), "This sentence contains at least one error\n in grammar or "
-                                  "word usage. Click on the\n word that is the problem or part of the problem.")
+    text = Text(Point(160, 190), "A misplaced modifier is a word or phrase\n"
+                                 "that is supposed to describe something in\n"
+                                 "the sentence. Modifiers need to be placed\n"
+                                 "properly so that it is clear to the reader\n"
+                                 "what is being described or modified. Click\n"
+                                 "on the word below that is the problem or\n"
+                                 "part of the problem.")
     text.setTextColor("black")
     text.setSize(11)
     text.draw(win)
 
-    # Import first sentence from .csv file into this location.
-    text = Text(Point(160, 250), "The teacher returned the exam to the\n student that was all marked up.")
-
-    rectA = Rectangle(Point(105, 250), Point(275, 270)).draw(win)
-    rectA.setOutline(color_rgb(204, 236, 255))
+    # Show sentence #1
+    text = Text(Point(160, 290), "The teacher returned the exam to the\n student that was all marked up.")
+    rectA = Rectangle(Point(105, 290), Point(275, 310)).draw(win)      # invisible rectangle around answer
+    rectA.setOutline(color_rgb(204, 236, 255))                         # invisible rectangle around answer
     text.setTextColor("gray")
     text.setSize(13)
     text.draw(win)
+
+    # Justification for correct answer
+    # text = Text(Point(160, 340), "The teacher returned the exam that\n"
+    #                              "was marked up to the student.")
+    # text.setTextColor("red")
+    # text.setSize(12)
+    # text.setStyle("italic")
+    # text.draw(win)
 
     # Home button
     rect5 = Rectangle(Point(20, 410), Point(90, 440)).draw(win)
@@ -131,10 +144,11 @@ def misplacedmodifiers():
     text6.setTextColor("white")
     text6.setStyle("bold")
 
-    # If next button is clicked, import next sentence from .csv file.
+    rectA2 = Rectangle(Point(113, 290), Point(265, 310)).draw(win)
+    rectA2.setOutline(color_rgb(204, 236, 255))
 
 
-    whichsentence = 0
+    # whichsentence = 0   # Use this if importing sentences from csv file
     while True:
         clickPoint = win.checkMouse()
 
@@ -143,23 +157,75 @@ def misplacedmodifiers():
             if inside(clickPoint, rect5):
                 main()
 
-            elif inside(clickPoint, rect6):
-                whichsentence +=1
-                advancesentence(text, whichsentence)
+            # elif inside(clickPoint, rect6):
+            #     whichsentence +=1
+            #     advancesentence(text, whichsentence)
 
-            elif inside(clickPoint, rectA):
+            elif inside(clickPoint, rectA):     # When user chooses correctly
+                # rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
+                # rect.setOutline(color_rgb(204, 236, 255))
+                textc = Text(Point(155, 425), "Correct!").draw(win)
+                textc.setTextColor("red")
+                textc.setStyle("bold")
+                time.sleep(1)
+                textcs = Text(Point(160, 340), "The teacher returned the exam that\n"
+                                 "was marked up to the student.")
+                textcs.setTextColor("red")
+                textcs.setSize(12)
+                textcs.setStyle("italic")
+                textcs.draw(win)
+                time.sleep(2)
+                rect = Rectangle(Point(10, 290), Point(300, 330))
+                rect.setFill(color_rgb(204, 236, 255))
+                rect.setOutline(color_rgb(204, 236, 255))
+                time.sleep(2)
+                textc.undraw()
+                time.sleep(2)
+                textcs.undraw()
+
+
+            elif inside(clickPoint, rect6):     # Next button brings up a new sentence
+                rect = Rectangle(Point(10, 260), Point(300, 360))#.draw(win)
+                rect.setFill(color_rgb(204, 236, 255))
+                rect.setOutline(color_rgb(204, 236, 255))
+                rect.draw(win)
+                text = Text(Point(160, 290), "We ate the meal our friends "
+                                             "\ncooked on our kitchen table.")
+                rectA2 = Rectangle(Point(113, 290), Point(265, 310)).draw(win)
+                rectA2.setOutline(color_rgb(204, 236, 255))
+                text.setTextColor("gray")
+                text.setSize(13)
+                text.draw(win)
+
+            elif inside(clickPoint, rectA2):
+                textc = Text(Point(155, 425), "Correct!").draw(win)
+                textc.setTextColor("red")
+                textc.setStyle("bold")
+                time.sleep(1)
+                textcs2 = Text(Point(160, 340), "On our kitchen table, we ate\n"
+                                              "the meal our friends cooked.")
+                textcs2.setTextColor("red")
+                textcs2.setSize(12)
+                textcs2.setStyle("italic")
+                textcs2.draw(win)
+                time.sleep(2)
+                rect = Rectangle(Point(10, 290), Point(300, 330))
+                rect.setFill(color_rgb(204, 236, 255))
+                rect.setOutline(color_rgb(204, 236, 255))
+                time.sleep(2)
+                textc.undraw()
+                time.sleep(2)
+                textcs2.undraw()
+
+
+            elif clickPoint != inside(clickPoint, rectA):       # When user chooses incorrectly
                 rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
                 rect.setOutline(color_rgb(204, 236, 255))
-                text = Text(Point(155, 425), "Correct!").draw(win)
-                text.setTextColor("red")
-                text.setStyle("bold")
-
-            elif clickPoint != inside(clickPoint, rectA):
-                rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
-                rect.setOutline(color_rgb(204, 236, 255))
-                text = Text(Point(155, 425), "Try again").draw(win)
-                text.setTextColor("red")
-                text.setStyle("bold")
+                textta = Text(Point(155, 425), "Try again").draw(win)
+                textta.setTextColor("red")
+                textta.setStyle("bold")
+                time.sleep(1.5)
+                textta.undraw()
 
 
     # win.getMouse()
