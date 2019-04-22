@@ -147,6 +147,12 @@ def misplacedmodifiers():
     rectA2 = Rectangle(Point(113, 290), Point(265, 310)).draw(win)
     rectA2.setOutline(color_rgb(204, 236, 255))
 
+    textcs = Text(Point(160, 340), "The teacher returned the exam that\n"
+                                 "was marked up to the student.")
+
+    textcs2 = Text(Point(160, 340), "On our kitchen table, we ate\n"
+                                              "the meal our friends cooked.")
+
 
     # whichsentence = 0   # Use this if importing sentences from csv file
     while True:
@@ -161,9 +167,11 @@ def misplacedmodifiers():
             #     whichsentence +=1
             #     advancesentence(text, whichsentence)
 
-            elif inside(clickPoint, rectA):     # When user chooses correctly
-                # rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
-                # rect.setOutline(color_rgb(204, 236, 255))
+
+
+            elif inside(clickPoint, rectA):     # When user chooses the sensitized area holding answer 1
+                rectA = Rectangle(Point(105, 290), Point(275, 310)).draw(win)      # invisible rectangle around answer
+                rectA.setOutline(color_rgb(204, 236, 255))
                 textc = Text(Point(155, 425), "Correct!").draw(win)
                 textc.setTextColor("red")
                 textc.setStyle("bold")
@@ -182,9 +190,11 @@ def misplacedmodifiers():
                 textc.undraw()
                 time.sleep(2)
                 textcs.undraw()
+                rectA.undraw()
 
 
-            elif inside(clickPoint, rect6):     # Next button brings up a new sentence
+
+            elif inside(clickPoint, rect6):     # Next button brings up sentence 2
                 rect = Rectangle(Point(10, 260), Point(300, 360))#.draw(win)
                 rect.setFill(color_rgb(204, 236, 255))
                 rect.setOutline(color_rgb(204, 236, 255))
@@ -197,7 +207,7 @@ def misplacedmodifiers():
                 text.setSize(13)
                 text.draw(win)
 
-            elif inside(clickPoint, rectA2):
+            elif inside(clickPoint, rectA2) and question == 2:  # when user chooses the sensitized area holding answer 2
                 textc = Text(Point(155, 425), "Correct!").draw(win)
                 textc.setTextColor("red")
                 textc.setStyle("bold")
