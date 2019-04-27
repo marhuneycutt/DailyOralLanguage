@@ -53,7 +53,6 @@ def main():
     text4.setTextColor("white")
     text4.setStyle("bold")
 
-
     while True:
         clickPoint = win.checkMouse()
 
@@ -115,27 +114,12 @@ def misplacedmodifiers():
     text.setSize(13)
     text.draw(win)
 
-    # Justification for correct answer
-    # text = Text(Point(160, 340), "The teacher returned the exam that\n"
-    #                              "was marked up to the student.")
-    # text.setTextColor("red")
-    # text.setSize(12)
-    # text.setStyle("italic")
-    # text.draw(win)
-
     # Home button
     rect5 = Rectangle(Point(20, 410), Point(90, 440)).draw(win)
     rect5.setFill(color_rgb(28, 147, 215))
     text5 = Text(Point(57, 425), "Home").draw(win)
     text5.setTextColor("white")
     text5.setStyle("bold")
-
-    # Try again button
-    # rect7 = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
-    # rect7.setOutline(color_rgb(204, 236, 255))
-    # text7 = Text(Point(155, 425), "Try again").draw(win)
-    # text7.setTextColor("red")
-    # text7.setStyle("bold")
 
     # Next button
     rect6 = Rectangle(Point(220, 410), Point(290, 440)).draw(win)
@@ -153,8 +137,6 @@ def misplacedmodifiers():
     textcs2 = Text(Point(160, 340), "On our kitchen table, we ate\n"
                                               "the meal our friends cooked.")
 
-
-    # whichsentence = 0   # Use this if importing sentences from csv file
     while True:
         clickPoint = win.checkMouse()
 
@@ -162,12 +144,6 @@ def misplacedmodifiers():
 
             if inside(clickPoint, rect5):
                 main()
-
-            # elif inside(clickPoint, rect6):
-            #     whichsentence +=1
-            #     advancesentence(text, whichsentence)
-
-
 
             elif inside(clickPoint, rectA):     # When user chooses the sensitized area holding answer 1
                 rectA = Rectangle(Point(105, 290), Point(275, 310)).draw(win)      # invisible rectangle around answer
@@ -191,8 +167,6 @@ def misplacedmodifiers():
                 time.sleep(2)
                 textcs.undraw()
                 rectA.undraw()
-
-
 
             elif inside(clickPoint, rect6):     # Next button brings up sentence 2
                 rect = Rectangle(Point(10, 260), Point(300, 360))#.draw(win)
@@ -227,7 +201,6 @@ def misplacedmodifiers():
                 time.sleep(2)
                 textcs2.undraw()
 
-
             elif clickPoint != inside(clickPoint, rectA):       # When user chooses incorrectly
                 rect = Rectangle(Point(120, 410), Point(190, 440)).draw(win)
                 rect.setOutline(color_rgb(204, 236, 255))
@@ -236,11 +209,6 @@ def misplacedmodifiers():
                 textta.setStyle("bold")
                 time.sleep(1.5)
                 textta.undraw()
-
-
-    # win.getMouse()
-    # win.close()
-
 
 def pronouncase():
     # Create graphics window
